@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>
+    {%block Title%}
+    Crowd Funding
+    {% endblock %}
+  </title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  {% block head-css %}
+  <link rel="stylesheet" type="text/css" href="{% static '' %}">
+  <link rel="stylesheet" type="text/css" href="{% static '' %}">
+  {% endblock %}
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light  sticky-top" style="background-color: black;">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light " href="{%url 'home'%}"><b> CROWD FUNDING </b></a>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {%if request.user.is_authenticated%}
+          <li class="nav-item">
+            <a class="nav-link text-light " href="{%url 'users:logout'%}">LOG OUT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{%url 'list_project'%}">PROJECTS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{%url 'users:userprofile'%}">PROFILE</a>
+          </li>
+          {%else%}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{%url 'users:register'%}">REGISTER</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{%url 'users:login'%}">LOG IN</a>
+          </li>
+          {%endif%}
+      </div>
+      </ul>
+
+      <a class="nav-link btn" href="{%url 'create_project'%}"
+        style="background-color:#72B01D; border-radius:10px; text-decoration: none; color: #000; font-weight: 600;">CREATE
+        PROJECT</a>
+      <form class="d-flex" action="{%url 'search'%}" method="POST">
+        {% csrf_token %}
+        <input class="form-control" type="text" name="query" placeholder="Search" style="margin-left: 10px;" required />
+        <input type="submit" class="btn btn-outline-light" name="Search" style="margin-left: 10px;" />
+        <!--  -->
+      </form>
+    </div>
+    </div>
+  </nav>
+  <div>
+    {%block content%}
+    <h1>HomePage</h1>
+    {%endblock%}
+  </div>
+  <footer class="text-center fixed-bottom text-white" style="margin-top: 100px; ">
+
+    <div class="text-center p-3 " style="background-color: #000;">
+      © 2023 Copyright: Crowd Funding
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
+  
+</body>
+
+</html>

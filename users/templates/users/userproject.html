@@ -1,0 +1,41 @@
+{%extends  'base.html'%}
+{% load static %}
+{% block Title %} Projects {% endblock %}
+{% block head-css %}
+<link rel="stylesheet" href="{% static 'css/usersindex.css' %}">
+{% endblock %}
+{% block content %}
+<div class="sidebar" style="width:15%">
+    <br/>
+    <br/>
+    <br/>
+    <a href="{% url 'users:userprofile' %}" class="w3-bar-item w3-button">Profile</a> <br> <br>
+    <a href="{%url 'users:userproject' user.id %}" class="w3-bar-item w3-button">Projects </a> <br> <br>
+    <a href="{%url 'users:userdonation' user.id %}" class="w3-bar-item w3-button">Donations</a> <br> <br>
+    <a href="{%url 'users:logout' %}" class="w3-bar-item w3-button">Log out</a> <br> <br>
+</div>
+<div class="container" style="margin-left:20%">
+    <br>
+    <h2> Hy! {{request.user.username}}</h2>
+    <!--    <h6 >Your No. of projects is <span style="color:green">{{ projects.count }} </span> </h6>-->
+    <div class="container">
+        {% if projects.count == 0 %}
+        <div style="color:red"> Unfortunately, you don't have any project</div>
+        {% else %}
+
+        {%for project in projects %}
+        <div>
+          <br>
+          
+          <span style="color:green; font-weight: bold; ">Title:  </span> {{ project.title }} <br>
+          <span style="color:green; font-weight: bold;">Start Date:  </span> {{ project.start_date }} <br>
+          <span style="color:green; font-weight: bold;" >End Date: </span>  {{ project.end_date }} <br>
+          <a class="btn-danger" href="{% url 'cancel_project' project.project_id %}">Cancel project</a>
+          <br>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

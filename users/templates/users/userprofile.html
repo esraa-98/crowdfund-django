@@ -1,0 +1,41 @@
+
+{%extends  'base.html'%}
+
+{% load static%}
+{% block Title %} Profile {% endblock %}
+{% block head-css %}
+ <link rel="stylesheet" href="{% static 'css/usersindex.css' %}">
+<link rel="stylesheet" href="{% static 'css/userprofile.css' %}">
+{% endblock %}
+{% block content %}
+<div class="sidebar" style="width:15%">
+    <br/>
+    <br/>
+    <br/>
+    <a href="{% url 'users:userprofile' %}" class="w3-bar-item w3-button">Profile</a> <br> <br>
+    <a href="{%url 'users:userproject' user.id %}" class="w3-bar-item w3-button">Projects </a> <br> <br>
+    <a href="{%url 'users:userdonation' user.id %}" class="w3-bar-item w3-button">Donations</a> <br> <br>
+    <a href="{%url 'users:logout' %}" class="w3-bar-item w3-button">Log out</a> <br> <br>
+</div>
+<div class="card mb-4 border-0" style="margin-left:20% ;">
+    <br/>
+    <br/>
+    <img class="img-radius profile-image" src="{{request.user.photo.url}}" alt="Card image cap" style="width:100%; max-width: 300px;height: 100%;max-height: 300px;">
+    <div class="card-body">
+        <h5 class="card-title username" style="font-size: 2em; color: #72B01D;">{{request.user.username}}</h5>
+        <p class="card-text"><span class="data">First Name: </span><span>{{request.user.first_name}}</span></p>
+        <p class="card-text"><span class="data">Last Name: </span><span>{{request.user.last_name}}</span></p>
+        <p class="card-text"><span class="data">Email: </span><span>{{request.user.email}}</span></p>
+        <p class="card-text"><span class="data">Phone: </span><span>{{request.user.phone}}</span></p>
+        <p class="card-text"><span class="data">Country: </span><span>{{request.user.country}}</span></p>
+        <p class="card-text">
+            <br/>
+            <br/>
+            <a href="{% url 'users:deleteprofile' user.id %}" class="btn btn-outline-danger  active" role="button"
+               aria-pressed="true">Delete Account</a>
+            <a href="{%url 'users:editprofile' user.id %}" class="btn btn-outline-success  active" role="button"
+               aria-pressed="true">Edit Account</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
